@@ -67,6 +67,10 @@ netflixData.A.Movies <- subset(netflixData.A,netflixData.A$type == 'Movie')
 # On peut maintenant exploiter les données de ces deux bases pour le début de l'étude.
 
 
+# On supprime les écarts négatives 
+
+netflixData.H.Movies <- subset(netflixData.H.Movies,(as.numeric(netflixData.H.Movies$date_added)-as.numeric(netflixData.H.Movies$release_year))>=0)
+
 
 
 

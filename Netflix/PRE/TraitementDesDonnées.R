@@ -4,6 +4,9 @@
 
 netflixData <- read.csv('Ressources/netflix_data.csv',TRUE,sep = ",")
 
+# PRE-TRAITEMENT
+# DONNES MANQUANTES
+
 # On va d'abord calculer l'impact des données manquantes colonne par colonne
 # On calcule le nombre total de lignes 
 
@@ -56,20 +59,51 @@ netflixData.H <- netflixData.H[complete.cases(netflixData.H), ]
 
 netflixData.A <- netflixData.A[complete.cases(netflixData.A), ]
 
+# TRAITEMENT PREMIERE QUESTION
+
 # Pour la première question de l'étude, il nous ai demandé de comparer le temps moyen entre la sortie
 # des films et leur ajout au carnet Netflix pour valider une hypothèse, on doit donc traiter les données
 # et créer une nouvelle base de données pour chaque partie, dans laquelle ne figure que les films.
 
 netflixData.H.Movies <- subset(netflixData.H,netflixData.H$type =='Movie')
 
-netflixData.A.Movies <- subset(netflixData.A,netflixData.A$type == 'Movie')
+netflixData.A.Movies <- subset(netflixData.A,netflixData.A$type =='Movie')
 
 # On peut maintenant exploiter les données de ces deux bases pour le début de l'étude.
 
 
-# On supprime les écarts négatives 
+# On supprime les écarts négatives que l'on peut trouver dûs probablement à une erreur de saisie 
 
 netflixData.H.Movies <- subset(netflixData.H.Movies,(as.numeric(netflixData.H.Movies$date_added)-as.numeric(netflixData.H.Movies$release_year))>=0)
+
+
+#TRAITEMENT QUATRIEME QUESTION
+
+# Pour la quatrième question, on doit formater les durées des films et des saisons, pour les films, on enlève le "min" et pour les saisons
+# on va convertir le nombre de saisons en min, en partant du principe que 1 saison c'est 12 épisodes de 30 minutes.
+# On n'a développé une fonction pour ça, la fonction "duration_formatting"
+
+# On vérifie d'abord qu'il n'y pas de valeurs vides pour duration (On a déjà supprimé les colonnes avec des valeurs NA précèdemment)
+# Pour NetflixData.A :
+
+missingDurationValue.A <- sum(netflixData.A$duration == "")
+
+# On trouve 0, on peut donc appliquer la fonction et stocker le resultat dans une nouvelle colonne "new_duration"
+
+netflixData.A$new_duration <- sapply(netflixData.A$duration, duration_formatting)
+
+# pour NetflixData.H :
+
+missingDurationValue.H <- sum(netflixData.H$duration == "")
+
+# On trouve 3 valeurs vides, on va donc supprimer les lignes concernées, vu la quantité (3/7309)
+
+netflixData.H <- netflixData.H[!(netflixData.H$duration == ""),]
+
+# On peut maintenant appliquer la fonction sur netflixData.H également et créer cette nouvelle colonne
+
+netflixData.H$new_duration <- sapply(netflixData.H$duration, duration_formatting)
+
 
 
 

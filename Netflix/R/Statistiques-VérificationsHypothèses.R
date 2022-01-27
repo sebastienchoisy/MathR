@@ -9,7 +9,7 @@
 # Moyenne entre la sortie en salle et sur Netxflix en 2021 = Moyenne entre la sortie en salle et sur netflix avant 2021
 
 
-# H1 : Le temps moyens entre la sortie du fiilm et son ajout au carnet Netflix s'est raccourci 
+# H1 : Le temps moyens entre la sortie du film et son ajout au carnet Netflix s'est raccourci 
 # Moyenne entre la sortie en salle et sur netflix avant 2021 > Moyenne entre la sortie en salle et sur Netxflix en 2021 
 
 
@@ -163,7 +163,7 @@ nb.total.A <- nrow(netflixData.A)
 nb.total.A
 
 
-# On peut maintnent effectuer test de proportion: 
+# On peut maintenant effectuer test de proportion: 
 prop.test(x = c(nb.TVShow.H, nb.TVShow.A), 
           n = c(nb.total.H, nb.total.A), 
           alternative = "less")   # "less" car H1 est proportion de TV Show avant 2021 < celle en 2021
@@ -174,11 +174,54 @@ prop.test(x = c(nb.TVShow.H, nb.TVShow.A),
 
 
 # 4.même question que la précédente mais en prenant en compte la durée en minutes 
-
-#la fonction pour reformatter les durées
-# Une saison = 12 épisode = 30min par épisode
-
+# Est ce que c'est vrai que la proportion de show télévisés qui sont mis au programme a considérablement augmenté 
+# par rapport aux autres programmes (films, séries) en minutes ? 
 
 
-netflixData.A$new_duration <- sapply(netflixData.A$duration, duration_formatting)
+# On regarde la proportion des programmes: 
+# avant 2021:
+
+# On calcule le total de minutes pour H :
+
+totalMinutes.H <- sum(as.numeric(netflixData.H$new_duration))
+
+# On calcule le total de minutes pour les TvShow de H d'une part et pour les Movies de H d'autre part :
+
+totalTvShowMinutes.H <- sum(as.numeric(netflixData.H[netflixData.H$type == "TV Show", 13]))
+totalMovieMinutes.H <- sum(as.numeric(netflixData.H[netflixData.H$type == "Movie", 13]))
+
+# On peut maintenant calculer la proportion:
+
+proportionTvShowMinutes.H <- (totalTvShowMinutes.H/totalMinutes.H)*100
+proportionMovieMinutes.H <- (totalMovieMinutes.H/totalMinutes.H)*100
+
+# Il y a 72.6% de TvShows et 27.4% de Movies avant 2021 en minutes.
+
+# On refait les calculs identiques pour l'année 2021 :
+
+totalMinutes.A <- sum(as.numeric(netflixData.A$new_duration))
+
+totalTvShowMinutes.A <- sum(as.numeric(netflixData.A[netflixData.A$type == "TV Show", 13]))
+totalMovieMinutes.A <- sum(as.numeric(netflixData.A[netflixData.A$type == "Movie", 13]))
+
+proportionTvShowMinutes.A <- (totalTvShowMinutes.A/totalMinutes.A)*100
+proportionMovieMinutes.A <- (totalMovieMinutes.A/totalMinutes.A)*100
+
+# Il y a 77.7% de TvShows et 22.3% de Movies en minutes.
+
+# Hypothèse: 
+# H0: la proportion de TV Show en minutes reste identique avant 2021 (p1) et en 2021 (p2), i.e. p1 = p2
+# H1: la proportion de TV Show en minutes a augmenté en 2021 qu'avant 2021, i.e. p1 < p2 (less) 
+
+
+prop.test(x = c(totalTvShowMinutes.H,totalTvShowMinutes.A),
+          n = c(totalMinutes.H,totalMinutes.A),
+          alternative="less")
+
+# La p-valeur est 2.2e-16 < 0,05
+# On peut donc rejeter l'hypothèse nulle que la proportion de TV Show en minutes reste identique
+# avant 2021 et en 2021
+
+
+
 

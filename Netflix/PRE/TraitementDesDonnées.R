@@ -2,7 +2,7 @@
 
 # On télécharge le csv de données Netflix
 
-netflixData <- read.csv('netflix_data.csv',TRUE,sep = ",")
+netflixData <- read.csv('Ressources/netflix_data.csv',TRUE,sep = ",")
 
 # On va d'abord calculer l'impact des données manquantes colonne par colonne
 # On calcule le nombre total de lignes 

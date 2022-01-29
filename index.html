@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport</title>
+</head>
+<body>
+    <h1>Quelques considerations sur Netflix</h1>
+    <h2>Description du sujet</h2>
+    <p>Netflix est un service de streaming vidéo qui dispose d'un catalogue varié de films et de séries. Nous avons accès aux données historiques du catalogue à l'adresse suivante : <a href="https://www.kaggle.com/shivamb/netflix-shows">https://www.kaggle.com/shivamb/netflix-shows</a>. Au cours de ce rapport nous allons étudier quelques tendances et évolutions concernant le catalogue avec une analyse statistique.</p>
+    <h2>Description des données utilisées</h2>
+    <h3>Chargement du CSV</h3>
+    <p>Les données utilisées proviennent d'un fichier CSV. Ce sont donc des exports et non un accès direct à la base de donnée de la plateforme. Pour exploiter ce fichier avec r, nous utilisons la fonction suivante pour lire le fichier :<span class="code">read.csv('netflix_data.csv',TRUE,sep = ",")</span></p>
+    <h3>Vérification de la donnée</h3>
+    <p>La donnée est maitenant chargée, nous allons maintenant évaluer la qualité de la donnée. Nous commençons donc par déterminer le nombre de données manquantes. Pour les colonnes qui nous intéressent pour notre étude à savoir : le type de contenu, la date d'ajout, la date de sortie et enfin la catégorie (la colonne listed_in). Pour identifier les vides nous évaluons le pourcentage de donné vides avec la formule suivante : <span class="code">missingDataForTypeColumn <- (sum(is.na(netflixData$type) | netflixData$type == "")/TotalRowNumber)*100</span>Notre recherche a permis de conclure qu'il n'existait presque aucun vide (0,11% de vide pour la colonne date d'ajout).</p>
+    <h3>Séparation de la donnée</h3>
+    <p>Maintenant que nous avons extrait la donnée et évalué sa qualité nous pouvons maintenant procéder au traitement. Au cours de cette étude nous avons séparé les données en deux parties : les données avant 2020 qui est l'historique et la donnée de 2021.
+        <span class="code">
+            netflixData.H <- subset(netflixData, substrRight(netflixData$date_added,4) < 2021)
+        </span>
+    Vous pouvez retrouver l'ensemble de ces traitements dans le fichier "TraitementDesDonnées.R".
+    </p>
+    <h2>Méthodologie suivie</h2>
+    <h2>Les résultats</h2>
+    <h2>Présentation du groupe</h2>
+</body>
+
+<style>
+    h1 {
+        color: red;
+        text-transform: uppercase;
+        margin-bottom: 40px;
+    }
+
+    body {
+    background: #141414;
+    color: #fff;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    line-height: 1.2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+    text-align: justify;
+    max-width: 1150px;
+    margin : auto
+    }
+    
+    a {
+        color: rgba(255, 255, 255, 0.781);
+    }
+
+    .code {
+        display: block;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #3f3f3f;
+        border-radius: 5px;
+        width: fit-content;
+    }
+</style>
+</html>

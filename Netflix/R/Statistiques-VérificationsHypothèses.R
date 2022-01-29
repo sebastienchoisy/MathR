@@ -26,12 +26,14 @@ netflixData.A.Movies$Dif <- as.numeric(netflixData.A.Movies$date_added) - netfli
 # avant 2021:
 
 summary(netflixData.H.Movies$Dif)
+mean(netflixData.H.Movies$Dif)
 var(netflixData.H.Movies$Dif)
 sd(netflixData.H.Movies$Dif)
 
 # en 2021:
 
 summary(netflixData.A.Movies$Dif)
+mean(netflixData.A.Movies$Dif)
 var(netflixData.A.Movies$Dif)
 sd(netflixData.A.Movies$Dif)
 

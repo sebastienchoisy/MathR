@@ -27,8 +27,16 @@
     <p>Concernant notre approche, nous avons réalisé des tests d'hypothèses avec les tests de Student. Cette méthodologie permet d'aller plus loin que de seulement comparer deux moyennes. En effet sur un échantillon de données réduit il est possible que par la fruit du hasard, on observe des statistiques différentes que sur la série entière. Il est donc dangereux d'uniquement se servir d'une moyenne pour affirmer ou infirmer une hypothèse. Le test de Student prend en compte justement ce cas de figure.</p>
     <p>Dans le cas de notre étude, nous avons comparé deux échantillions de données : les données avant 2021 nommées H et les données de 2021 notées A. Nous avons voulu déterminé si l'écart entre la sortie d'un film et sa date d'ajout sur la plateforme s'était réduit au fil du temps. En regardant les moyennes nous trouvons plutôt l'inverse en comparant 2021 avec les années antérieurs mais est-ce suffisant pour tirer une conclusion ? En adoptant une démarche scientifique nous constatons que 2021 peut être considéré comme une année parmis d'autres et donc ce n'est qu'un échantillion. Par le fruit du hasard et en fonction de la variance de ma série je ne peux pas déterminer avec exactitudes que 2021 soit représentatif de l'ensemble.</p>
     <p>Pour répondre à notre question nous avons donc adopté l'approche de student en partant de l'hypothèse que la moyenne de 2021 est égale à celle des années antérieurs. En effet à ce stade rien ne nous indique que 2021 est une année particulière. Nous avons donc adopté cette méthodologie au cours de notre analyse pour affirmer ou infirmer nos hypothèses.</p>
-
     <h3>L'implémentation avec R</h3>
+    <p>Le langage R dispose de fonction pour réaliser des tests d'hypothèses que nous avons utilisé lors de notre étude. La fonction t.test ci dessous permet de tester un échantillion avec la méthodologie de student.<span class="code">
+        t.test(x=netflixData.H.Movies$Dif, 
+               y=netflixData.A.Movies$Dif, 
+               alternative = "greater",  
+               var.equal = FALSE,        
+               paired = FALSE,      
+               conf.level=0.95)</span>
+        Nous remarquons que dans la fonction ci dessus que nous testons les échantillions de 2021 (A) et l'échantillion avant 2021 (H) pour un taux de confiance de 95%. Nous avons mis "greater" dans la propriété alternative car l'hypothèse alternative est que l'écart se réduit et donc que la différence pour l'échantillion H soit plus grande que celle de l'échantillion A.   
+    </p>
     <h2>Les résultats</h2>
     <h2>Présentation du groupe</h2>
 </body>

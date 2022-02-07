@@ -75,11 +75,40 @@
     <p>
         La p-valeur est < 0,05, donc on rejète H0 que le temps moyen entre la sortie du film et son ajout ne change pas pour les années avant 2021 et en 2021. Moyenne entre la sortie en salle et sur netflix avant 2021 est donc inférieur à la moyenne entre la sortie en salle et sur Netxflix en 2021 
     </p>
+
     <div class="split"><img src="./imgs/4.png" alt="img1"><img src="./imgs/5.png" alt="img1"></div>
     <div class="split"></div>
     <div class="imgSolo">
         <img src="./imgs/6.png" alt="img3">
     </div>
+    <h3>Est ce que c'est vrai que la proportion de show télévisés qui sont mis au programme a considérablement augmenté par rapport aux autres programmes (films, séries) ?</h3>
+    <p>Regardons la répartition des films et séries dans nos deux séries.</p>
+    <div class="split"><img src="./imgs/8.png" alt="img1"><img src="./imgs/9.png" alt="img1"></div>
+    <p>Nous remarquons qu'à priori il y a davantage de séries sorties dans le catalogue en 2021 que dans les années antérieurs. Réalisons un test d'hypothèse pour vérifier cette observation :
+        <span class="code">prop.test(x = c(nb.TVShow.H, nb.TVShow.A), 
+            n = c(nb.total.H, nb.total.A), 
+            alternative = "less") </span>
+    </p>
+    <div class="imgSolo">
+        <img src="./imgs/10.png" alt="img10">
+    </div>
+    <p>La p-valeur est 0,001174 < 0,05 donc on rejète hypothèse nulle que la proportion de TV Show est identique avant 2021 et en 2021. La proportion de TV Show a augmenté en 2021 par rapport à avant 2021</p>
+    <h3>Est ce que c'est vrai que la proportion de show télévisés qui sont mis au programme a considérablement augmenté par rapport aux autres programmes (films, séries) en minutes ? </h3>
+    <p>Regardons la répartition des films et séries dans la totalité du contenu du catalogue.</p>
+    <div class="split"><img src="./imgs/11.png" alt="img1"><img src="./imgs/12.png" alt="img1"></div>
+    <p>Il y a 72.6% de TvShows et 27.4% de Movies avant 2021 en minutes. Il y a 77.7% de TvShows et 22.3% de Movies en minutes en 2021. Regardons maintenant si cette différence de 5% est le fruit du hasard avec un test :
+        <span class="code">
+            prop.test(x = c(totalTvShowMinutes.H,totalTvShowMinutes.A),
+          n = c(totalMinutes.H,totalMinutes.A),
+          alternative="less")
+        </span>
+    </p>
+    <img src="./imgs/13" alt="13" width="100%">
+    <p>
+
+        La p-valeur est 2.2e-16 < 0,05
+        On peut donc rejeter l'hypothèse nulle que la proportion de TV Show en minutes reste identique avant 2021 et en 2021. La proportion de film a donc baissé en termes de durée de contenu.
+    </p>
     <h2>Présentation du groupe</h2>
     <p>Le groupe est constitué de Shan , Sébastien Choisy et de Rémi Dufeu. Nous avons conjointement réalisé l'ensemble des activités.</p>
     <br>

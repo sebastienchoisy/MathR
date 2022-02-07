@@ -38,6 +38,18 @@
         Nous remarquons que dans la fonction ci dessus que nous testons les échantillions de 2021 (A) et l'échantillion avant 2021 (H) pour un taux de confiance de 95%. Nous avons mis "greater" dans la propriété alternative car l'hypothèse alternative est que l'écart se réduit et donc que la différence pour l'échantillion H soit plus grande que celle de l'échantillion A.   
     </p>
     <h2>Les résultats</h2>
+    <h3>Est-ce que c’est vrai que le temps moyen entre la sortie du film et son ajout au carnet Netflix s’est raccourci ?</h3>
+    <p>Pour répondre à cette question nous avons commencé par analyser brièvement nos statistiques.</p>
+    <div class="split"><img src="./imgs/1.png" alt="img1"><img src="./imgs/2.png" alt="img1"></div>
+    <div class="split"><div>avant 2021</div><div>2021</div></div>
+    <div class="imgSolo">
+        <img src="./imgs/3.png" alt="img3">
+    </div>
+    <div class="split"><img src="./imgs/4.png" alt="img1"><img src="./imgs/5.png" alt="img1"></div>
+    <div class="split"></div>
+    <div class="imgSolo">
+        <img src="./imgs/6.png" alt="img3">
+    </div>
     <h2>Présentation du groupe</h2>
     <p>Le groupe est constitué de Shan , Sébastien Choisy et de Rémi Dufeu. Nous avons conjointement réalisé l'ensemble des activités.</p>
     <br>
@@ -79,6 +91,27 @@
         background-color: #3f3f3f;
         border-radius: 5px;
         width: fit-content;
+    }
+
+    .split {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .split img {
+        width: 40%;
+        height: auto;
+
+    }
+
+    .imgSolo img{
+        width: 400px;
+        margin: 20px auto;
+        height: auto;
+    }
+
+    .imgSolo {
+        text-align: center;
     }
 </style>
 </html>

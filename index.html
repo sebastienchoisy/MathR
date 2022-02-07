@@ -42,9 +42,39 @@
     <p>Pour répondre à cette question nous avons commencé par analyser brièvement nos statistiques.</p>
     <div class="split"><img src="./imgs/1.png" alt="img1"><img src="./imgs/2.png" alt="img1"></div>
     <div class="split"><div>avant 2021</div><div>2021</div></div>
+    <p>Si nous regardons les graphiques nous remarquons que l'écart entre la sortie du film et son ajout au catalogue est dans la plupart des cas plutôt court. Les données de 2021 et des données historiques semblent avoir une distribution similaire à première vue.</p>
     <div class="imgSolo">
         <img src="./imgs/3.png" alt="img3">
     </div>
+    <p>Concernant la moyenne d'écart entre la sortie du film et son ajout du catalogue, on remarque que la moyenne de 2021 est supérieur. Si on prend en considération seulement la moyenne on peut dire que le temps moyen entre la sortie s'est donc allongé.</p>
+    <p>La moyenne n'est pas une donnée suffisante pour valider ou réfuter une hypothèse puisque 2021 n'est qu'un échantillion. Pour pouvoir tirer une conclusion nous devons prendre en considération le hasard lié à la taille de l'échantillion et à la distribution. Nous réalisons donc un test d'hypothèse.</p>
+    <p><span class="code">t.test(x=netflixData.H.Movies$Dif, 
+        y=netflixData.A.Movies$Dif, 
+        alternative = "greater", 
+        var.equal = FALSE,       
+        paired = FALSE,      
+        conf.level=0.95)</span>
+    </p>
+    <img src="./imgs/screentest1" alt="screentest1" width="100%">
+    <p>
+    Résultat : La p-valeur est > 0,05, donc on ne peut pas rejeter H0 que le temps moyen entre la sortie du film et son ajout ne change pas pour les années avant 2021 et en 2021.
+    </p>
+    <p>
+    Avec les données actuelles nous ne pouvons pas réfuter notre hypothèse. Notre hypothèse reste donc privillégier, le temps entre la sortie d'un film et son ajout au catalogue ne se rallonge donc pas.
+    </p>
+    <h3>A votre avis quelle est la cause de la tendance que vous remarquez au point précèdent ? Proposez une solution pour pouvoir donner une reponse plus réaliste au point 1) et refaites les calculs en ce sens.</h3>
+    <p>Si nous regardons notre test d'hypothèse précédent, nous avons pris comme hypothèse alternative que l'écart se réduisait au fil des années. Or si nous regardons la moyenne des deux séries, l'inverse est plus pausible. Prenons alors l'hypothèse que l'écart se rallonge :
+    <span class="code">t.test(x=netflixData.H.Movies$Dif, 
+        y=netflixData.A.Movies$Dif, 
+        alternative = "less",
+        var.equal = FALSE, 
+        paired = FALSE,      
+        conf.level=0.95)</span>
+    </p>
+    <img src="./imgs/screentest2" alt="screentest2" width="100%">
+    <p>
+        La p-valeur est < 0,05, donc on rejète H0 que le temps moyen entre la sortie du film et son ajout ne change pas pour les années avant 2021 et en 2021. Moyenne entre la sortie en salle et sur netflix avant 2021 est donc inférieur à la moyenne entre la sortie en salle et sur Netxflix en 2021 
+    </p>
     <div class="split"><img src="./imgs/4.png" alt="img1"><img src="./imgs/5.png" alt="img1"></div>
     <div class="split"></div>
     <div class="imgSolo">

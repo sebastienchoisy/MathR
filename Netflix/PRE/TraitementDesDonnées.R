@@ -100,6 +100,8 @@ missingDurationValue.H <- sum(netflixData.H$duration == "")
 
 netflixData.H <- netflixData.H[!(netflixData.H$duration == ""),]
 
+netflixData.H.Movies <- netflixData.H.Movies[!(netflixData.H.Movies$duration == ""),]
+
 # On peut maintenant appliquer la fonction sur netflixData.H également et créer cette nouvelle colonne
 
 netflixData.H$new_duration <- sapply(netflixData.H$duration, duration_formatting)

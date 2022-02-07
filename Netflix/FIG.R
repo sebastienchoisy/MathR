@@ -37,15 +37,20 @@ barplot(x,col=c(2,3),legend.text = c("avant 2021","après 2021"),args.legend=lis
 # on regarde le pourcentage de chaque rating pour la base de données avant 2021
 c <- prop.table(table(netflixData.H.Movies$rating)) * 100
 
-plot(c)
+plot(c,xlab = "différent rating",ylab = "nombre de films en pourcentage", main="Le pourcentage de film avant 2021 selon le rating")
 
 # on regarde le pourcentage de chaque rating pour la base de données en 2021
 d <- prop.table(table(netflixData.A.Movies$rating)) * 100
-plot(d)
+
+plot(d,xlab = "différent rating",ylab = "nombre de films en pourcentage", main="Le pourcentage de film en 2021 selon le rating")
 
 # Etude de la durée en minute et date_added
 e <- mean(netflixData.A.Movies$min)
 f <- mean(netflixData.H.Movies$min)
+
+y = c(mean(netflixData.H.Movies$min),mean(netflixData.A.Movies$min))
+
+barplot(y,col=c(2,3),legend.text = c("avant 2021","après 2021"),args.legend=list(x="topright"),main="Moyenne de la durée des films") 
 
 
 # Question 3 : 

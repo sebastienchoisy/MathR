@@ -25,6 +25,10 @@ missingDataForDateAddedColumn <- (sum(is.na(netflixData$date_added) | netflixDat
 
 missingDataForDateAddedColumn <- Pourcentage_formatting(missingDataForDateAddedColumn)
 
+# Le pourcentage de données manquantes pour la colonne "date_added" est 0.03 %
+
+missingDataForDurationColumn <- (sum(is.na(netflixData$duration) | netflixData$duration == "")/TotalRowNumber)*100
+
 # Le pourcentage de données manquantes pour la colonne "date_added" est 0.11 %
 
 missingDataForReleaseYearColumn <- (sum(is.na(netflixData$release_year) | netflixData$release_year == "")/TotalRowNumber)*100
@@ -36,7 +40,13 @@ missingDataForListedInColumn <- (sum(is.na(netflixData$listed_in) | netflixData$
 # Le pourcentage de données manquantes pour la colonne "listed_in" est de 0 %
 
 # On constate qu'il y a très peu de données manquantes et qu'il n'est donc 
-# pas nécessaire de traiter cette base de données dans ce sens
+# pas nécessaire de traiter cette base de données dans ce sens et on va simplement supprimer les lignes concernées par la suite
+
+NAValueForDurationColumn <- (sum(is.na(netflixData$duration)))
+# On constate qu'il n'y a aucune valeur NA dans la colonne duration mais seulement des valeurs manquantes, on va donc supprimer 
+# les lignes avec une valeur manquante pour duration.
+
+netflixData <- netflixData[!(netflixData$duration == ""),]
 
 # On va donc maintenant diviser la base de données en deux parties, les données 
 # des programmes ajoutés à Netflix du début à 2020, netflixData.H et les données des programmes
@@ -58,6 +68,7 @@ netflixData.H$date_added <- substrRight(netflixData.H$date_added,4)
 netflixData.H <- netflixData.H[complete.cases(netflixData.H), ]
 
 netflixData.A <- netflixData.A[complete.cases(netflixData.A), ]
+
 
 # TRAITEMENT PREMIERE QUESTION
 
@@ -83,25 +94,10 @@ netflixData.H.Movies <- subset(netflixData.H.Movies,(as.numeric(netflixData.H.Mo
 # on va convertir le nombre de saisons en min, en partant du principe que 1 saison c'est 12 épisodes de 30 minutes.
 # On n'a développé une fonction pour ça, la fonction "duration_formatting"
 
-# On vérifie d'abord qu'il n'y pas de valeurs vides pour duration (On a déjà supprimé les colonnes avec des valeurs NA précèdemment)
-# Pour NetflixData.A :
-
-missingDurationValue.A <- sum(netflixData.A$duration == "")
-
-# On trouve 0, on peut donc appliquer la fonction et stocker le resultat dans une nouvelle colonne "new_duration"
 
 netflixData.A$new_duration <- sapply(netflixData.A$duration, duration_formatting)
 
 # pour NetflixData.H :
-
-missingDurationValue.H <- sum(netflixData.H$duration == "")
-
-# On trouve 3 valeurs vides, on va donc supprimer les lignes concernées, vu la quantité (3/7309)
-
-netflixData.H <- netflixData.H[!(netflixData.H$duration == ""),]
-
-netflixData.H.Movies <- netflixData.H.Movies[!(netflixData.H.Movies$duration == ""),]
-
 # On peut maintenant appliquer la fonction sur netflixData.H également et créer cette nouvelle colonne
 
 netflixData.H$new_duration <- sapply(netflixData.H$duration, duration_formatting)

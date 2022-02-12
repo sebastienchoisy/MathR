@@ -61,10 +61,10 @@ t.test(x=netflixData.H.Movies$Dif,
 
 # Par convention, on prend hypothèse null: mu1 = mu2
 # H0 : Le temps moyen entre la sortie du film et son ajout au carnet Netflix n'est pas raccourci, 
-# moyenne entre la sortie en salle et sur Netxflix en 2021 = Moyenne entre la sortie en salle et sur netflix avant 2021
+# moyenne entre la sortie en salle et sur Netflix en 2021 = Moyenne entre la sortie en salle et sur netflix avant 2021
 
 # H1 : le temps moyens entre la sortie du film et son ajout au carnet Netflix est prolongé
-# Moyenne entre la sortie en salle et sur netflix avant 2021 < moyenne entre la sortie en salle et sur Netxflix en 2021
+# Moyenne entre la sortie en salle et sur netflix avant 2021 < moyenne entre la sortie en salle et sur Netflix en 2021
 
 # on refait le test dans ce sens
 t.test(x=netflixData.H.Movies$Dif, 
